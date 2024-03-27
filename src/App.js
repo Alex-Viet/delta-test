@@ -1,8 +1,16 @@
 import './App.css';
 import { proceeds } from './data/proceeds';
 import { calculatePercent } from './utils/calcPerc';
+import { LineChart } from './components/LineChart';
+import { useState } from 'react';
 
 function App() {
+  const [sums, setSums] = useState([]);
+
+  const handleTableRowClick = (evt, num1, num2) => {
+    evt.preventDefault();
+    setSums([num1, num2]);
+  };
   return (
     <div className="App">
       <table className="table">
@@ -15,7 +23,11 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr
+            onClick={(evt) =>
+              handleTableRowClick(evt, proceeds[0].item[2], proceeds[0].item[1])
+            }
+          >
             <td>{proceeds[0].item[0].title}</td>
             <td>{proceeds[0].item[1].toLocaleString('ru')}</td>
             <td
@@ -36,10 +48,17 @@ function App() {
             <td>{proceeds[0].item[3].toLocaleString('ru')}</td>
           </tr>
           <tr>
-            <td colSpan="4" height="50px"></td>
+            <td colSpan="4">
+              <LineChart data={sums} />
+            </td>
           </tr>
           {proceeds.slice(1).map((el, i) => (
-            <tr key={i}>
+            <tr
+              onClick={(evt) =>
+                handleTableRowClick(evt, el.item[2], el.item[1])
+              }
+              key={i}
+            >
               <td>{el.item[0].title}</td>
               <td>{el.item[1].toLocaleString('ru')}</td>
               <td
