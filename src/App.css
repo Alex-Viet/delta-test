@@ -68,3 +68,8 @@
     text-align: center;
   }
 }
+
+.chart {
+  max-width: 1200px;
+  min-width: 300px;
+}

@@ -10,34 +10,31 @@ import {
   Legend,
   LineSeries,
 } from 'react-jsx-highcharts';
-
-const plotOptions = {
-  series: {
-    pointStart: 1,
-  },
-};
+import '../App.css';
 
 export const LineChart = ({ data }) => {
   return (
-    <HighchartsProvider Highcharts={Highcharts}>
-      <HighchartsChart plotOptions={plotOptions}>
-        <Chart />
+    <div className="chart">
+      <HighchartsProvider Highcharts={Highcharts}>
+        <HighchartsChart>
+          <Chart />
 
-        <Title></Title>
+          <Title></Title>
 
-        <Subtitle></Subtitle>
+          <Subtitle></Subtitle>
 
-        <Legend layout="vertical" align="right" verticalAlign="middle" />
+          <Legend layout="vertical" align="right" verticalAlign="middle" />
 
-        <XAxis>
-          <XAxis.Title>День</XAxis.Title>
-        </XAxis>
+          <XAxis categories={['вчера', 'сегодня']}>
+            <XAxis.Title>День</XAxis.Title>
+          </XAxis>
 
-        <YAxis>
-          <YAxis.Title>Сумма, руб</YAxis.Title>
-          <LineSeries name="Installation" data={data} />
-        </YAxis>
-      </HighchartsChart>
-    </HighchartsProvider>
+          <YAxis>
+            <YAxis.Title>Сумма, руб</YAxis.Title>
+            <LineSeries name="Installation" data={data} />
+          </YAxis>
+        </HighchartsChart>
+      </HighchartsProvider>
+    </div>
   );
 };
